@@ -20,7 +20,7 @@ const Chart = ({ data: { confirmed, deaths, recovered }, country }) => {
             ? (
                 <Line
                     data={{
-                        labels: dailyData.map(({ date }) => new Date(date).toLocaleDateString('pt-BR') ),
+                        labels: dailyData.map(({ date }) => new Date(date).toLocaleDateString('pt-BR')),
                         datasets: [{
                             data: dailyData.map(({ confirmed }) => confirmed),
                             label: 'Confirmados',
@@ -59,7 +59,7 @@ const Chart = ({ data: { confirmed, deaths, recovered }, country }) => {
                         title: { display: true, text: `Números atuais ${country}` },
                     }}
                 />
-            ): null
+            ) : null
     );
 
     return (

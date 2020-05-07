@@ -7,16 +7,16 @@ import styles from './Cards.module.css';
 
 const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
     if (!confirmed) {
-        return 'Loanding...';
+        return 'Carregando...';
     }
     return (
         <div className={styles.container}>
-            <Grid container spacing={3} justify="center">
+            <Grid container spacing={3} justify="space-around">
                 <Grid item component={Card} xs={12} md={3} className={cx(styles.card, styles.infected)}>
                     <CardContent>
                         <Typography color="textSecondary" gutterBottom>Confirmados</Typography>
                         <Typography variant="h5">
-                            <CountUp start={0} end={confirmed.value} duration={2.5} separator="," />
+                            <CountUp start={0} end={confirmed.value} duration={2.5} separator=" " />
                         </Typography>
                         <Typography color="textSecondary">{new Date(lastUpdate).toLocaleDateString('pt-br',
                             {
@@ -33,7 +33,7 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
                     <CardContent>
                         <Typography color="textSecondary" gutterBottom>Recuperados</Typography>
                         <Typography variant="h5">
-                            <CountUp start={0} end={recovered.value} duration={2.5} separator="," />
+                            <CountUp start={0} end={recovered.value} duration={2.5} separator=" " />
                         </Typography>
                         <Typography color="textSecondary">{new Date(lastUpdate).toLocaleDateString('pt-br',
                             {
@@ -50,7 +50,7 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
                     <CardContent>
                         <Typography color="textSecondary" gutterBottom>Mortes</Typography>
                         <Typography variant="h5">
-                            <CountUp start={0} end={deaths.value} duration={2.5} separator="," />
+                            <CountUp start={0} end={deaths.value} duration={2.5} separator=" " />
                         </Typography>
                         <Typography color="textSecondary">{new Date(lastUpdate).toLocaleDateString('pt-br',
                             {
