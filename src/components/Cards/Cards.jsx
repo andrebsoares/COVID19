@@ -9,60 +9,33 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
     if (!confirmed) {
         return 'Carregando...';
     }
+
+    const card = (title, information, style, subtitle) => (
+        <Grid item component={Card} xs={12} md={3} className={cx(styles.card, style)}>
+            <CardContent>
+                <Typography color="textSecondary" gutterBottom>{title}</Typography>
+                <Typography variant="h5">
+                    <CountUp start={0} end={information.value} duration={2.5} separator=" " />
+                </Typography>
+                <Typography color="textSecondary">{new Date(lastUpdate).toLocaleDateString('pt-br',
+                    {
+                        year: 'numeric',
+                        month: ('long' || 'short' || 'numeric'),
+                        weekday: ('long' || 'short'),
+                        day: 'numeric',
+                    }
+                )}</Typography>
+                <Typography variant="body2">{subtitle}</Typography>
+            </CardContent>
+        </Grid>
+    );
+
     return (
         <div className={styles.container}>
             <Grid container spacing={3} justify="space-around">
-                <Grid item component={Card} xs={12} md={3} className={cx(styles.card, styles.infected)}>
-                    <CardContent>
-                        <Typography color="textSecondary" gutterBottom>Confirmados</Typography>
-                        <Typography variant="h5">
-                            <CountUp start={0} end={confirmed.value} duration={2.5} separator=" " />
-                        </Typography>
-                        <Typography color="textSecondary">{new Date(lastUpdate).toLocaleDateString('pt-br',
-                            {
-                                year: 'numeric',
-                                month: ('long' || 'short' || 'numeric'),
-                                weekday: ('long' || 'short'),
-                                day: 'numeric',
-                            }
-                        )}</Typography>
-                        <Typography variant="body2">Número de casos confirmados de COVID-19</Typography>
-                    </CardContent>
-                </Grid>
-                <Grid item component={Card} xs={12} md={3} className={cx(styles.card, styles.recovered)}>
-                    <CardContent>
-                        <Typography color="textSecondary" gutterBottom>Recuperados</Typography>
-                        <Typography variant="h5">
-                            <CountUp start={0} end={recovered.value} duration={2.5} separator=" " />
-                        </Typography>
-                        <Typography color="textSecondary">{new Date(lastUpdate).toLocaleDateString('pt-br',
-                            {
-                                year: 'numeric',
-                                month: ('long' || 'short' || 'numeric'),
-                                weekday: ('long' || 'short'),
-                                day: 'numeric',
-                            }
-                        )}</Typography>
-                        <Typography variant="body2">Número de recuperados de COVID-19</Typography>
-                    </CardContent>
-                </Grid>
-                <Grid item component={Card} xs={12} md={3} className={cx(styles.card, styles.deaths)}>
-                    <CardContent>
-                        <Typography color="textSecondary" gutterBottom>Mortes</Typography>
-                        <Typography variant="h5">
-                            <CountUp start={0} end={deaths.value} duration={2.5} separator=" " />
-                        </Typography>
-                        <Typography color="textSecondary">{new Date(lastUpdate).toLocaleDateString('pt-br',
-                            {
-                                year: 'numeric',
-                                month: ('long' || 'short' || 'numeric'),
-                                weekday: ('long' || 'short'),
-                                day: 'numeric',
-                            }
-                        )}</Typography>
-                        <Typography variant="body2">Número de mortes por COVID-19</Typography>
-                    </CardContent>
-                </Grid>
+                {card("Confirmados", confirmed, "styles.infected" , "Número de casos confirmados de COVID-19")}
+                {card("Recuperados", recovered, "styles.recovered", "Número de recuperados de COVID-19")}
+                {card("Mortes"     , deaths   , "styles.deaths"   , "Número de mortes por COVID-19")}
             </Grid>
 
         </div>
